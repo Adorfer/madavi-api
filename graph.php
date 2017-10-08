@@ -49,6 +49,7 @@ function show_all() {
 <a href="graph.php?showday">über einen Tag</a> - <a href="graph.php?showweek">über eine Woche</a> - <a href="graph.php?showmonth">über einen Monat</a> - <a href="graph.php?showfloat">gleitender 24h-Durchschnitt</a><br /><br />
 Filter: <a href="#" onclick="filter_type('sds');return false;">SDS</a> - 
 <a href="#" onclick="filter_type('ppd42ns');return false;">ppd42ns</a> - 
+<a href="#" onclick="filter_type('pms');return false;">PMS</a> -
 <a href="#" onclick="filter_type('dht');return false;">DHT</a> | <a href="#" onclick="show_all();return false;">Alle wieder anzeigen</a>
 <br /><br />
 <?php
