@@ -32,7 +32,7 @@ $datafile = "data/data-".$headers['Sensor']."-".$today.".csv";
 
 if (!file_exists($datafile)) {
 	$outfile = fopen($datafile,"a");
-	fwrite($outfile,"Time;durP1;ratioP1;P1;durP2;ratioP2;P2;SDS_P1;SDS_P2;Temp;Humidity;BMP_temperature;BMP_pressure;BME280_temperature;BME280_humidity;BME280_pressure;Samples;Min_cycle;Max_cycle;Signal\n");
+	fwrite($outfile,"Time;durP1;ratioP1;P1;durP2;ratioP2;P2;SDS_P1;SDS_P2;PMS_P0;PMS_P1;PMS_P2;Temp;Humidity;BMP_temperature;BMP_pressure;BME280_temperature;BME280_humidity;BME280_pressure;Samples;Min_cycle;Max_cycle;Signal\n");
 	fclose($outfile);
 }
 
@@ -44,6 +44,9 @@ if (! isset($values["ratioP2"])) { $values["ratioP2"] = ""; }
 if (! isset($values["P2"])) { $values["P2"] = ""; }
 if (! isset($values["SDS_P1"])) { $values["SDS_P1"] = ""; }
 if (! isset($values["SDS_P2"])) { $values["SDS_P2"] = ""; }
+if (! isset($values["PMS_P0"])) { $values["PMS_P0"] = ""; }
+if (! isset($values["PMS_P1"])) { $values["PMS_P1"] = ""; }
+if (! isset($values["PMS_P2"])) { $values["PMS_P2"] = ""; }
 if (! isset($values["temperature"])) { $values["temperature"] = ""; }
 if (! isset($values["humidity"])) { $values["humidity"] = ""; }
 if (! isset($values["BMP_temperature"])) { $values["BMP_temperature"] = ""; }
