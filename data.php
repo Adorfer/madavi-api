@@ -45,6 +45,8 @@ foreach ($results["sensordatavalues"] as $sensordatavalues) {
 // check for used sensors
 if (isset($values["durP1"]) && isset($values["durP2"])) { $has_ppd42ns = 1; } else { $has_ppd42ns = 0; }
 if (((! isset($values["durP1"])) && isset($values["P1"])) || (isset($values["SDS_P1"]) && isset($values["SDS_P2"]))) { $has_sds011 = 1; } else { $has_sds011 = 0; }
+if (((! isset($values["durP1"])) && isset($values["P1"])) || (isset($values["SDS_P0"]) && isset($values["SDS_P1"]) && isset($values["SDS_P2"]))) { $has_pms = 1; } else { $has_pms = 0; }
+
 if (isset($values["temperature"]) && isset($values["humidity"])) { $has_dht = 1; } else { $has_dht = 0; }
 if (isset($values["BMP_temperature"]) && isset($values["BMP_pressure"])) { $has_bmp = 1; } else { $has_bmp = 0; }
 
@@ -109,17 +111,48 @@ if ($has_sds011) {
 //		post_to_api($api_post_string,1);
 	}
 }
-
 $api_post_string = '';
-if ($has_dht) {
-	$update_string_dht = time().":";
-	$update_string_dht .= $values["temperature"];
-	$update_string_dht .= ":";
-	$update_string_dht .= $values["humidity"];
+if ($has_pms) {
+	$update_string_pms = time().":";
 	if (isset($values["samples"])) { $api_post_string .= '{"value_type":"samples","value":"'.$values["samples"].'"},'; }
 	if (isset($values["min_micro"])) { $api_post_string .= '{"value_type":"min_micro","value":"'.$values["min_micro"].'"},'; }
 	if (isset($values["max_micro"])) { $api_post_string .= '{"value_type":"max_micro","value":"'.$values["max_micro"].'"},'; }
+	if (isset($values["PMS_P0"])) {
+		$update_string_pms .= $values["PMS_P0"];
+		$update_string_pms .= ":";
+		$update_string_pms.= $values["PMS_P1"];
+		$update_string_pms .= ":";
+		$update_string_pms .= $values["PMS_P2"];
+		$api_post_string .= '{"value_type":"P0","value":"'.$values["PMS_P0"].'"},';
+		$api_post_string .= '{"value_type":"P1","value":"'.$values["PMS_P1"].'"},';
+		$api_post_string .= '{"value_type":"P2","value":"'.$values["PMS_P2"].'"},';
+//		post_to_api($api_post_string,1);
+	} else {
+		$update_string_pms .= $values["P0"];
+		$update_string_pms .= ":";
+		$update_string_pms .= $values["P1"];
+		$update_string_pms .= ":";
+		$update_string_pms .= $values["P2"];
+		$api_post_string .= '{"value_type":"P0","value":"'.$values["P0"].'"},';
+		$api_post_string .= '{"value_type":"P1","value":"'.$values["P1"].'"},';
+		$api_post_string .= '{"value_type":"P2","value":"'.$values["P2"].'"},';
+//		post_to_api($api_post_string,1);
+	}
+}
+}
+$api_post_stri0g = '';
+if ($has_dht) {
+	$u0date_string_dht = time().":";
+	$update_string_dht .= $values["temperature"];
+	$update_string_dht .= ":";
+	$update_string_dht .= $values["humidity"];
+	if (isset($values["samples"])) { $api_post_string .= '{"value_type":"samples","value":"'.$values[pmses"].'"},'; }
+0if (isset($values["min_micro"])) { $api_post_string .= '{"value_type":"min_micro","value":"'.$valpmsin_micro"].'"},'; }
+	if (isset($values["max_micro"])) { $api_post_string .= '{"value_type":"max_microalue":"'.$values[pmses"].'"},'; }
+	if (isset($values["min_micro"])) { $api_post_string .= '{"value_type":"min_micro","value":"'.$valpmsin_micro"].'"},'; }
+	if (isset($values["max_micro"])) { $api_post_string .= '{"value_type":"max_micro","value":"'.$valpmsax_micro"].'"},'; }
 	$api_post_string .= '{"value_type":"temperature","value":"'.$values["temperature"].'"},';
+	$ap0_post_string .= '{"valu0_type":"humidity","value":"'."'.$values["temperature"].'"},';
 	$api_post_string .= '{"value_type":"humidity","value":"'.$values["humidity"].'"},';
 //	post_to_api($api_post_string,7);
 }
